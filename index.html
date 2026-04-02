@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="S26-Team22 Capstone Project — Logging Agents for Data Exfiltration Detection. Detecting insider threats across USB, cloud, and email channels. University of Louisville CSE 496, Spring 2026." />
+  <title>Logging Agents for Data Exfiltration Detection — S26-Team22 | UofL CSE Capstone</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Font Awesome 6.5.1 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- AOS 2.3.4 CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="80">
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAVIGATION
+  ════════════════════════════════════════════════════════════ -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="#hero">
+        <i class="fa-solid fa-shield-halved"></i>S26-Team22
+      </a>
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#architecture">Architecture</a></li>
+          <li class="nav-item"><a class="nav-link" href="#implementation">Implementation</a></li>
+          <li class="nav-item"><a class="nav-link" href="#timeline">Timeline</a></li>
+          <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+          <li class="nav-item"><a class="nav-link" href="#swot">SWOT</a></li>
+          <li class="nav-item"><a class="nav-link" href="#future-work">Future Work</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="container text-center position-relative" style="z-index:1;">
+
+      <div data-aos="fade-down" data-aos-duration="600">
+        <span class="hero-badge">
+          <i class="fa-solid fa-graduation-cap me-1"></i>
+          CSE 496 &mdash; BACS Capstone Design &bull; Spring 2026
+        </span>
+      </div>
+
+      <h1 class="hero-title mt-2" data-aos="fade-up" data-aos-delay="100">
+        Logging Agents for<br><span class="teal">Data Exfiltration Detection</span>
+      </h1>
+
+      <p class="hero-subtitle mx-auto" data-aos="fade-up" data-aos-delay="200">
+        Detecting Insider Threats Across USB, Cloud, and Email Channels
+      </p>
+
+      <div class="hero-meta" data-aos="fade-up" data-aos-delay="300">
+        <span class="hero-meta-item">
+          <i class="fa-solid fa-users"></i> S26-Team22
+        </span>
+        <span class="hero-meta-item">
+          <i class="fa-solid fa-university"></i> University of Louisville
+        </span>
+        <span class="hero-meta-item">
+          <i class="fa-solid fa-building-columns"></i> Dept. of Computer Science &amp; Engineering
+        </span>
+        <span class="hero-meta-item">
+          <i class="fa-solid fa-user-tie"></i> Sponsor: Dr. Michael Robinson
+        </span>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="400">
+        <a href="#about" class="btn-teal me-3">
+          Explore the Project <i class="fa-solid fa-arrow-down ms-1"></i>
+        </a>
+        <a href="#architecture" class="btn-outline-teal">
+          View Architecture
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ABOUT
+  ════════════════════════════════════════════════════════════ -->
+  <section id="about">
+    <div class="container">
+
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Background</span>
+        <h2 class="section-heading">About the Project</h2>
+        <span class="section-accent centered"></span>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- The Problem -->
+        <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+          <div class="card-dark about-card h-100">
+            <i class="fa-solid fa-triangle-exclamation icon-lg"></i>
+            <h3>The Problem</h3>
+            <p>
+              Organizations invest heavily in external security but frequently overlook
+              risks from insiders who already have legitimate access to sensitive data.
+              Insider threats exploit normal workflows &mdash; USB transfers, email
+              attachments, and cloud uploads &mdash; to move data outside the organization.
+            </p>
+            <p>
+              There is no direct system event in Windows that signals when a user
+              uploads a file to the cloud or sends it via email. USB transfers generate
+              massive amounts of background noise that drowns out genuine transfer events.
+            </p>
+            <p>
+              As a result, organizations cannot reliably detect or reconstruct data
+              exfiltration events using standard system logs, leaving a dangerous blind
+              spot in their security posture.
+            </p>
+          </div>
+        </div>
+
+        <!-- Our Solution -->
+        <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+          <div class="card-dark about-card h-100">
+            <i class="fa-solid fa-shield-halved icon-lg"></i>
+            <h3>Our Solution</h3>
+            <p>
+              Our project builds a modular, endpoint-based detection system that monitors
+              and logs data exfiltration events across three distinct channels: USB drives,
+              cloud storage uploads, and email attachments.
+            </p>
+            <p>
+              Rather than relying on direct system events, the system uses
+              <strong class="text-teal">behavioral analysis</strong> &mdash; correlating
+              file access patterns, process activity, and network events &mdash; to
+              identify exfiltration with configurable confidence levels.
+            </p>
+            <p>
+              All three agents produce structured, investigator-friendly
+              <strong class="text-teal">CSV logs</strong> with consistent fields and
+              SHA-256 file hashes. This common format enables cross-channel correlation,
+              allowing investigators to link the same file appearing in email, USB, and
+              cloud logs &mdash; concrete evidence of multi-channel exfiltration.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SYSTEM ARCHITECTURE
+  ════════════════════════════════════════════════════════════ -->
+  <section id="architecture">
+    <div class="container">
+
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">System Design</span>
+        <h2 class="section-heading">System Architecture</h2>
+        <span class="section-accent centered"></span>
+        <p class="text-muted-custom" style="max-width:580px; margin: 0 auto;">
+          Three independent detection agents feed a unified forensic layer,
+          enabling cross-channel correlation via SHA-256 file hashes.
+        </p>
+      </div>
+
+      <!-- Architecture Diagram -->
+      <div class="arch-diagram" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- Row 1: Three Agent Cards -->
+        <div class="arch-agents-row">
+
+          <!-- USB Agent -->
+          <div class="card-dark arch-agent-card" data-aos="zoom-in" data-aos-delay="150">
+            <i class="fa-solid fa-hard-drive icon-agent"></i>
+            <h4><i class="fa-solid fa-usb me-1 text-teal"></i> USB Transfer Monitor</h4>
+            <ul>
+              <li>Monitors CreateFile operations on non-system drives via ProcMon</li>
+              <li>Intelligent filtering of background noise to isolate real transfers</li>
+              <li>Captures timestamps, metadata, file copies, and SHA-256 hashes</li>
+              <li>Heartbeat system prevents unauthorized agent termination</li>
+            </ul>
+            <div class="mt-2">
+              <span class="badge-teal">ProcMon PML&rarr;CSV</span>
+            </div>
+          </div>
+
+          <!-- Cloud Agent -->
+          <div class="card-dark arch-agent-card" data-aos="zoom-in" data-aos-delay="250">
+            <i class="fa-solid fa-cloud-arrow-up icon-agent"></i>
+            <h4><i class="fa-solid fa-cloud me-1 text-teal"></i> Cloud Upload Detector</h4>
+            <ul>
+              <li>No direct OS event &mdash; uses behavioral correlation instead</li>
+              <li>Detects file read (CreateFile + ReadFile, &#x2265;5 KB) followed by network sends within ~2 sec</li>
+              <li>Requires &#x2265;3 network send events from the same browser process</li>
+              <li>Identifies Google, AWS, Microsoft OneDrive, and Dropbox services</li>
+            </ul>
+            <div class="mt-2">
+              <span class="badge-teal">Medium / High Confidence</span>
+            </div>
+          </div>
+
+          <!-- Email Agent -->
+          <div class="card-dark arch-agent-card" data-aos="zoom-in" data-aos-delay="350">
+            <i class="fa-solid fa-envelope-open-text icon-agent"></i>
+            <h4><i class="fa-solid fa-envelope me-1 text-teal"></i> Email Attachment Monitor</h4>
+            <ul>
+              <li>Dual-backend: Outlook COM (desktop) + Microsoft Graph API (web/365)</li>
+              <li>Polls every 5 seconds for outgoing emails with attachments</li>
+              <li>SHA-256 hash per attachment; recipient domain classification</li>
+              <li>Auto-forwarding rule detection via Graph API</li>
+            </ul>
+            <div class="mt-2">
+              <span class="badge-teal">~1,180 lines Python</span>
+              <span class="badge-green ms-1">Thread-Safe</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Arrows: agents -> connector line -->
+        <div class="arch-arrows-row">
+          <div class="arch-arrow-col">
+            <div class="arch-arrow-line"></div>
+            <div class="arch-arrow-head"><i class="fa-solid fa-caret-down"></i></div>
+          </div>
+          <div class="arch-arrow-col">
+            <div class="arch-arrow-line"></div>
+            <div class="arch-arrow-head"><i class="fa-solid fa-caret-down"></i></div>
+          </div>
+          <div class="arch-arrow-col">
+            <div class="arch-arrow-line"></div>
+            <div class="arch-arrow-head"><i class="fa-solid fa-caret-down"></i></div>
+          </div>
+        </div>
+
+        <!-- Connector line -->
+        <div class="arch-connector-row">
+          <div class="arch-connector-line"></div>
+        </div>
+
+        <!-- SHA-256 Bridge -->
+        <div class="arch-bridge-row">
+
+          <div class="arch-bridge-arrow">
+            <div class="arch-arrow-line"></div>
+            <div class="arch-arrow-head"><i class="fa-solid fa-caret-down"></i></div>
+          </div>
+
+          <div class="card-dark arch-bridge-card" data-aos="zoom-in" data-aos-delay="200">
+            <i class="fa-solid fa-fingerprint icon-lg" style="font-size:2rem;"></i>
+            <h4>SHA-256 Forensic Bridge</h4>
+            <p>
+              Every file hash is computed across all three agents. If the same SHA-256
+              hash appears in email logs <em>and</em> USB logs, that is concrete,
+              cryptographic evidence of multi-channel exfiltration &mdash; linking the
+              same file across independent detection channels.
+            </p>
+          </div>
+
+          <div class="arch-bridge-arrow">
+            <div class="arch-arrow-line"></div>
+            <div class="arch-arrow-head"><i class="fa-solid fa-caret-down"></i></div>
+          </div>
+
+          <!-- Unified Logs -->
+          <div class="card-dark arch-output-card" data-aos="zoom-in" data-aos-delay="300">
+            <i class="fa-solid fa-file-csv text-teal" style="font-size:2rem; margin-bottom:0.5rem; display:block;"></i>
+            <h4>Unified CSV Logs</h4>
+            <p>filename &bull; path &bull; timestamp &bull; user &bull; process &bull; network &bull; confidence &bull; SHA-256</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       IMPLEMENTATION DETAILS
+  ════════════════════════════════════════════════════════════ -->
+  <section id="implementation">
+    <div class="container">
+
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Technical Details</span>
+        <h2 class="section-heading">Implementation Details</h2>
+        <span class="section-accent centered"></span>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-dark impl-card">
+            <i class="fa-brands fa-python icon-impl"></i>
+            <h4>Built with Python</h4>
+            <ul>
+              <li>Automates ProcMon for USB &amp; cloud agents</li>
+              <li>PML &rarr; CSV pipeline and event extraction</li>
+              <li>~1,180 lines for the email agent alone</li>
+              <li>Nuitka compilation: Python &rarr; native C binary</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-dark impl-card">
+            <i class="fa-solid fa-database icon-impl"></i>
+            <h4>Structured CSV Logging</h4>
+            <ul>
+              <li>Filename &amp; full file path</li>
+              <li>Timestamp, user, and process name</li>
+              <li>Network activity and confidence level</li>
+              <li>SHA-256 hash for forensic correlation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-dark impl-card">
+            <i class="fa-solid fa-code-branch icon-impl"></i>
+            <h4>Threading &amp; Concurrency</h4>
+            <ul>
+              <li>Concurrent Outlook COM + Graph API backends</li>
+              <li>Thread-safe data structures throughout</li>
+              <li>Automatic log rotation at 10 MB</li>
+              <li>Heartbeat system prevents forced termination</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+          <div class="card-dark impl-card">
+            <i class="fa-solid fa-gear icon-impl"></i>
+            <h4>Zero-Config Deployment</h4>
+            <ul>
+              <li>Environment variable configuration</li>
+              <li>No source code changes needed to deploy</li>
+              <li>Modular agents run independently</li>
+              <li>Competitor domain list is configurable</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Technical callout cards -->
+      <div class="row g-4 mt-2">
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-dark p-3" style="border-left: 3px solid var(--accent-teal);">
+            <h6 class="text-teal mb-2"><i class="fa-solid fa-cloud me-2"></i>Cloud Confidence Scoring</h6>
+            <p class="mb-1" style="font-size:0.85rem; color:var(--text-secondary);">
+              <strong class="text-primary">Medium:</strong> File read (&#x2265;5 KB) + &#x2265;3 network send events from same browser process within ~2 seconds.
+            </p>
+            <p class="mb-0" style="font-size:0.85rem; color:var(--text-secondary);">
+              <strong class="text-primary">High:</strong> File read (&#x2265;10 KB) + &#x2265;5 network sends. Services identified: Google, AWS, OneDrive, Dropbox.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-dark p-3" style="border-left: 3px solid var(--accent-teal);">
+            <h6 class="text-teal mb-2"><i class="fa-solid fa-envelope me-2"></i>Recipient Classification</h6>
+            <p class="mb-0" style="font-size:0.85rem; color:var(--text-secondary);">
+              Outgoing attachments classified by destination:
+              <span class="badge-teal mx-1">Internal</span>
+              <span class="badge-teal mx-1">Personal</span>
+              <span class="badge-teal mx-1">Competitor</span>
+              <span class="badge-teal mx-1">External</span><br />
+              Reports highest-risk classification when multiple recipients are present.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-dark p-3" style="border-left: 3px solid var(--accent-teal);">
+            <h6 class="text-teal mb-2"><i class="fa-solid fa-forward me-2"></i>Auto-Forwarding Detection</h6>
+            <p class="mb-0" style="font-size:0.85rem; color:var(--text-secondary);">
+              Inspired by Dr. Robinson's insider threat research: insiders frequently
+              enable mail auto-forwarding rules to silently exfiltrate all incoming email.
+              Detected via Microsoft Graph API inbox rule inspection.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TIMELINE
+  ════════════════════════════════════════════════════════════ -->
+  <section id="timeline">
+    <div class="container">
+
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Progress</span>
+        <h2 class="section-heading">Project Timeline</h2>
+        <span class="section-accent centered"></span>
+      </div>
+
+      <div class="timeline">
+
+        <!-- Weeks 1-3 -->
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+          <div class="timeline-dot"></div>
+          <div class="card-dark timeline-card">
+            <i class="fa-solid fa-magnifying-glass timeline-icon"></i>
+            <div class="timeline-period">Weeks 1 &ndash; 3</div>
+            <h4>Research &amp; Environment Setup</h4>
+            <ul>
+              <li>Researched insider threat patterns and exfiltration channels</li>
+              <li>Surveyed existing detection methodologies and gaps</li>
+              <li>Configured development environment and ProcMon tooling</li>
+              <li>Defined CSV log schema and agent interfaces</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Weeks 4-6 -->
+        <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+          <div class="timeline-dot"></div>
+          <div class="card-dark timeline-card">
+            <i class="fa-solid fa-usb timeline-icon"></i>
+            <div class="timeline-period">Weeks 4 &ndash; 6</div>
+            <h4>USB Detection &amp; Cloud Correlation</h4>
+            <ul>
+              <li>USB transfer detection implemented and validated</li>
+              <li>Noise-filtering logic for non-system drive activity</li>
+              <li>Cloud upload behavioral correlation engine developed</li>
+              <li>Network event correlation window tuned to ~2 seconds</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Weeks 6-9 -->
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="300">
+          <div class="timeline-dot"></div>
+          <div class="card-dark timeline-card">
+            <i class="fa-solid fa-envelope timeline-icon"></i>
+            <div class="timeline-period">Weeks 6 &ndash; 9</div>
+            <h4>Email Monitoring Agent</h4>
+            <ul>
+              <li>Outlook COM backend for desktop Outlook (pywin32)</li>
+              <li>Microsoft Graph API integration with OAuth2 for web/365</li>
+              <li>Dual-backend threading architecture and log rotation</li>
+              <li>Recipient domain classification and auto-forwarding detection</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Weeks 10-12 -->
+        <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
+          <div class="timeline-dot"></div>
+          <div class="card-dark timeline-card">
+            <i class="fa-solid fa-box-archive timeline-icon"></i>
+            <div class="timeline-period">Weeks 10 &ndash; 12</div>
+            <h4>Integration, Testing &amp; Packaging</h4>
+            <ul>
+              <li>Full system integration and cross-channel SHA-256 correlation testing</li>
+              <li>Auto-forwarding rule detection finalized</li>
+              <li>Nuitka packaging: compiled Python agents to native C binaries</li>
+              <li>End-to-end validation across all three detection channels</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TEAM
+  ════════════════════════════════════════════════════════════ -->
+  <section id="team">
+    <div class="container">
+
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">The People</span>
+        <h2 class="section-heading">Meet the Team</h2>
+        <span class="section-accent centered"></span>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+
+        <!-- Jose Fuentes -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card-dark team-card text-center">
+            <div class="team-avatar mx-auto">JF</div>
+            <h4>Jose Fuentes</h4>
+            <p class="team-role">Email &amp; Forensics Lead</p>
+            <hr class="team-divider" />
+            <ul class="team-contributions text-start">
+              <li>Developed email monitoring agent (<code style="color:var(--accent-teal);background:rgba(0,212,255,0.08);padding:0 3px;border-radius:3px;">email_monitor.py</code>) with dual-backend architecture</li>
+              <li>Implemented Outlook COM backend via pywin32 for desktop Outlook</li>
+              <li>Implemented Microsoft Graph API backend (OAuth2) for Outlook Web/365</li>
+              <li>Designed SHA-256 hashing for all email attachments &mdash; the forensic bridge</li>
+              <li>Built recipient domain classification (internal, personal, competitor, external)</li>
+              <li>Implemented auto-forwarding rule detection via Graph API</li>
+              <li>Built thread-safe concurrent monitoring with automatic log rotation</li>
+              <li>Conducted research into kernel-level file I/O monitoring approaches</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Adam McCabe -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card-dark team-card text-center">
+            <div class="team-avatar mx-auto">AM</div>
+            <h4>Adam McCabe</h4>
+            <p class="team-role">Cloud Detection Lead</p>
+            <hr class="team-divider" />
+            <ul class="team-contributions text-start">
+              <li>Developed cloud upload detection logic and behavioral correlation engine</li>
+              <li>Designed the file-read + network-send correlation algorithm</li>
+              <li>Built filtering and noise reduction system for cloud events</li>
+              <li>Identified and mapped cloud service domains (Google, AWS, OneDrive, Dropbox)</li>
+              <li>Implemented confidence scoring (Medium/High) for upload events</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Shane Slack -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="card-dark team-card text-center">
+            <div class="team-avatar mx-auto">SS</div>
+            <h4>Shane Slack</h4>
+            <p class="team-role">USB &amp; Infrastructure Lead</p>
+            <hr class="team-divider" />
+            <ul class="team-contributions text-start">
+              <li>Developed USB transfer detection system and ProcMon automation</li>
+              <li>Built core ProcMon monitoring and PML &rarr; CSV pipeline</li>
+              <li>Implemented structured logging with normalized CSV output</li>
+              <li>Designed heartbeat system to prevent agent termination by bad actors</li>
+              <li>Designed SHA-256 hashing for file uploads and USB transfers</li>
+              <li>Set up Nuitka packaging to compile Python agents to native C binaries</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SWOT ANALYSIS
+  ════════════════════════════════════════════════════════════ -->
+  <section id="swot">
+    <div class="container">
+
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Evaluation</span>
+        <h2 class="section-heading">SWOT Analysis</h2>
+        <span class="section-accent centered"></span>
+      </div>
+
+      <div class="swot-grid" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- Strengths -->
+        <div class="swot-cell swot-strengths">
+          <h4>
+            <i class="fa-solid fa-circle-check"></i>
+            Strengths
+          </h4>
+          <ul>
+            <li>Multi-channel detection (email, USB, cloud) using behavioral analysis</li>
+            <li>Modular independent agents logging to a common CSV format</li>
+            <li>SHA-256 forensic bridge enables cross-channel correlation</li>
+            <li>Dual email backends cover both desktop and web Outlook</li>
+            <li>Auto-forwarding rule detection catches passive exfiltration</li>
+          </ul>
+        </div>
+
+        <!-- Weaknesses -->
+        <div class="swot-cell swot-weaknesses">
+          <h4>
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Weaknesses
+          </h4>
+          <ul>
+            <li>Behavioral heuristics may miss edge cases or unusual workflows</li>
+            <li>USB agent depends on ProcMon, limiting stealth and scalability</li>
+            <li>Gmail not yet integrated as an email backend</li>
+            <li>No real-time alerting &mdash; requires manual log review</li>
+            <li>Confidence thresholds require tuning per environment</li>
+          </ul>
+        </div>
+
+        <!-- Opportunities -->
+        <div class="swot-cell swot-opportunities">
+          <h4>
+            <i class="fa-solid fa-rocket"></i>
+            Opportunities
+          </h4>
+          <ul>
+            <li>Kernel-level ETW file monitoring for desktop applications</li>
+            <li>Real-time alerting dashboard for immediate threat notification</li>
+            <li>SIEM integration (Splunk, Microsoft Sentinel)</li>
+            <li>Multi-account enterprise monitoring across organizations</li>
+            <li>Gmail API integration &mdash; architecture already supports it</li>
+          </ul>
+        </div>
+
+        <!-- Threats -->
+        <div class="swot-cell swot-threats">
+          <h4>
+            <i class="fa-solid fa-skull-crossbones"></i>
+            Threats
+          </h4>
+          <ul>
+            <li>Browser sandboxing prevents kernel-level webmail detection (Chrome&rsquo;s memory-mapped I/O bypasses ETW)</li>
+            <li>OS and API updates could break existing integrations</li>
+            <li>Sophisticated insiders may use encrypted channels or personal devices</li>
+            <li>ProcMon detection by security-aware insiders</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FUTURE WORK
+  ════════════════════════════════════════════════════════════ -->
+  <section id="future-work">
+    <div class="container">
+
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Roadmap</span>
+        <h2 class="section-heading">Future Work</h2>
+        <span class="section-accent centered"></span>
+      </div>
+
+      <div style="max-width:800px; margin: 0 auto;">
+
+        <div class="future-item" data-aos="fade-left" data-aos-delay="100">
+          <div class="future-item-icon">
+            <i class="fa-brands fa-google"></i>
+          </div>
+          <div class="future-item-body">
+            <h5>Gmail API Integration</h5>
+            <p>The system architecture already supports pluggable email backends.
+               Adding a Gmail API backend would extend coverage to personal and
+               mixed-use environments without restructuring existing code.</p>
+          </div>
+        </div>
+
+        <div class="future-item" data-aos="fade-left" data-aos-delay="200">
+          <div class="future-item-icon">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <div class="future-item-body">
+            <h5>Kernel-Level ETW File Monitoring</h5>
+            <p>Replacing ProcMon with direct Event Tracing for Windows (ETW) would
+               provide stealthier, lower-overhead monitoring of file I/O events for
+               desktop email clients and other processes, without requiring an external tool.</p>
+          </div>
+        </div>
+
+        <div class="future-item" data-aos="fade-left" data-aos-delay="300">
+          <div class="future-item-icon">
+            <i class="fa-solid fa-gauge-high"></i>
+          </div>
+          <div class="future-item-body">
+            <h5>Real-Time Alerting Dashboard</h5>
+            <p>A web-based dashboard that aggregates all agent logs in real time and
+               triggers alerts when high-confidence exfiltration events or cross-channel
+               hash matches are detected.</p>
+          </div>
+        </div>
+
+        <div class="future-item" data-aos="fade-left" data-aos-delay="400">
+          <div class="future-item-icon">
+            <i class="fa-solid fa-puzzle-piece"></i>
+          </div>
+          <div class="future-item-body">
+            <h5>SIEM Platform Integration</h5>
+            <p>Connector modules for Splunk and Microsoft Sentinel would allow the
+               system&rsquo;s structured CSV logs to feed directly into enterprise security
+               information and event management platforms for centralized analysis.</p>
+          </div>
+        </div>
+
+        <div class="future-item" data-aos="fade-left" data-aos-delay="500">
+          <div class="future-item-icon">
+            <i class="fa-solid fa-building"></i>
+          </div>
+          <div class="future-item-body">
+            <h5>Enterprise Multi-Account Monitoring</h5>
+            <p>Scaling the system to monitor multiple user accounts concurrently
+               across an organization, with centralized log aggregation and per-user
+               behavioral baselines for more accurate anomaly detection.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       REFERENCES
+  ════════════════════════════════════════════════════════════ -->
+  <section id="references">
+    <div class="container">
+
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Sources</span>
+        <h2 class="section-heading">References</h2>
+        <span class="section-accent centered"></span>
+      </div>
+
+      <div style="max-width:800px; margin: 0 auto;">
+
+        <div class="ref-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="ref-number">[1]</div>
+          <div class="ref-body">
+            <p>Verizon. (2024). <em>2024 Data Breach Investigations Report.</em> Verizon Business.</p>
+            <a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>www.verizon.com/business/resources/reports/dbir/
+            </a>
+          </div>
+        </div>
+
+        <div class="ref-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="ref-number">[2]</div>
+          <div class="ref-body">
+            <p>Johannson, A. (2024, July 15). <em>Why So Many Organizations Underestimate Insider Threats.</em>
+               ISACA Now Blog. ISACA.</p>
+          </div>
+        </div>
+
+        <div class="ref-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="ref-number">[3]</div>
+          <div class="ref-body">
+            <p>Robinson, M. K. (2025). <em>Insider threats: Trend analysis of the tactics, techniques,
+               and procedures in computer-related insider threat cases</em> [Doctoral dissertation,
+               Purdue University].</p>
+            <a href="https://doi.org/10.25394/PGS.30166756" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>https://doi.org/10.25394/PGS.30166756
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="container">
+
+      <div class="row g-4 text-center text-md-start">
+
+        <div class="col-md-4">
+          <p class="footer-col-heading">Institution</p>
+          <p class="footer-brand">
+            <i class="fa-solid fa-building-columns me-2 text-teal"></i>University of Louisville
+          </p>
+          <p class="footer-sub">Department of Computer Science and Engineering</p>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <p class="footer-col-heading">Course</p>
+          <p class="footer-brand">CSE 496 &mdash; BACS Capstone Design</p>
+          <p class="footer-sub">Spring 2026 &bull; S26-Team22</p>
+        </div>
+
+        <div class="col-md-4 text-md-end">
+          <p class="footer-col-heading">Faculty Sponsor</p>
+          <p class="footer-brand">
+            <i class="fa-solid fa-user-tie me-2 text-teal"></i>Dr. Michael Robinson
+          </p>
+          <p class="footer-sub">University of Louisville</p>
+        </div>
+
+      </div>
+
+      <hr class="footer-divider" />
+
+      <p class="footer-bottom">
+        &copy; <span id="currentYear">2026</span> S26-Team22 &mdash; University of Louisville
+        &bull; Built with HTML, CSS &amp; JavaScript &bull; Hosted on AWS S3 + CloudFront
+      </p>
+
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3.3 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- AOS 2.3.4 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0afc/WfeFeBresHmuI85pVfIE1/QZruZ3dgsf39C9A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Custom JS (always last) -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
