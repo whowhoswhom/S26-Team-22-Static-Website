@@ -58,47 +58,103 @@
        HERO
   ════════════════════════════════════════════════════════════ -->
   <section id="hero">
-    <div class="container text-center position-relative" style="z-index:1;">
+    <div class="container hero-shell">
+      <div class="hero-copy">
+        <div data-aos="fade-down" data-aos-duration="600">
+          <span class="hero-badge">
+            <i class="fa-solid fa-graduation-cap me-1"></i>
+            CSE 496 - BACS Capstone Design - Spring 2026
+          </span>
+        </div>
 
-      <div data-aos="fade-down" data-aos-duration="600">
-        <span class="hero-badge">
-          <i class="fa-solid fa-graduation-cap me-1"></i>
-          CSE 496 &mdash; BACS Capstone Design &bull; Spring 2026
-        </span>
+        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+          Logging Agents for<br><span class="teal">Data Exfiltration Detection</span>
+        </h1>
+
+        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+          A forensic-first monitoring system that correlates USB transfers, cloud uploads,
+          and outgoing email attachments before exfiltration disappears into normal traffic.
+        </p>
+
+        <div class="hero-meta" data-aos="fade-up" data-aos-delay="280">
+          <span class="hero-meta-item">
+            <i class="fa-solid fa-users"></i> S26-Team22
+          </span>
+          <span class="hero-meta-item">
+            <i class="fa-solid fa-university"></i> University of Louisville
+          </span>
+          <span class="hero-meta-item">
+            <i class="fa-solid fa-building-columns"></i> Computer Science &amp; Engineering
+          </span>
+          <span class="hero-meta-item">
+            <i class="fa-solid fa-user-tie"></i> Sponsor: Dr. Michael Robinson
+          </span>
+        </div>
+
+        <div class="hero-actions" data-aos="fade-up" data-aos-delay="360">
+          <a href="#about" class="btn-teal">
+            Explore the Project <i class="fa-solid fa-arrow-down ms-1"></i>
+          </a>
+          <a href="#architecture" class="btn-outline-teal">
+            View Architecture
+          </a>
+        </div>
+
+        <div class="hero-stats" data-aos="fade-up" data-aos-delay="440">
+          <div class="hero-stat">
+            <span class="hero-stat-value">3</span>
+            <span class="hero-stat-label">Independent agents</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">SHA-256</span>
+            <span class="hero-stat-label">Cross-channel forensic bridge</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">5s</span>
+            <span class="hero-stat-label">Polling cadence for email monitoring</span>
+          </div>
+        </div>
       </div>
 
-      <h1 class="hero-title mt-2" data-aos="fade-up" data-aos-delay="100">
-        Logging Agents for<br><span class="teal">Data Exfiltration Detection</span>
-      </h1>
+      <div class="hero-visual" data-aos="fade-left" data-aos-delay="220">
+        <div class="hero-panel">
+          <div class="hero-panel-top">
+            <span class="hero-panel-chip">System view</span>
+            <span class="hero-panel-status">
+              <span class="status-dot"></span>
+              Detection pipeline active
+            </span>
+          </div>
 
-      <p class="hero-subtitle mx-auto" data-aos="fade-up" data-aos-delay="200">
-        Detecting Insider Threats Across USB, Cloud, and Email Channels
-      </p>
+          <div class="hero-panel-grid">
+            <div class="hero-panel-card">
+              <span class="hero-panel-eyebrow">USB monitor</span>
+              <strong>Transfer evidence collected</strong>
+              <p>ProcMon activity is filtered, normalized, and hashed for downstream correlation.</p>
+            </div>
+            <div class="hero-panel-card">
+              <span class="hero-panel-eyebrow">Cloud monitor</span>
+              <strong>Behavioral confidence scoring</strong>
+              <p>File reads and network sends are paired into investigator-ready events.</p>
+            </div>
+            <div class="hero-panel-card">
+              <span class="hero-panel-eyebrow">Email monitor</span>
+              <strong>Attachment intelligence</strong>
+              <p>Outbound attachments, recipient classes, and forwarding rules are captured together.</p>
+            </div>
+            <div class="hero-panel-card">
+              <span class="hero-panel-eyebrow">Unified output</span>
+              <strong>Evidence ready for analysts</strong>
+              <p>CSV logs align fields across all channels so the same file can be proven end to end.</p>
+            </div>
+          </div>
 
-      <div class="hero-meta" data-aos="fade-up" data-aos-delay="300">
-        <span class="hero-meta-item">
-          <i class="fa-solid fa-users"></i> S26-Team22
-        </span>
-        <span class="hero-meta-item">
-          <i class="fa-solid fa-university"></i> University of Louisville
-        </span>
-        <span class="hero-meta-item">
-          <i class="fa-solid fa-building-columns"></i> Dept. of Computer Science &amp; Engineering
-        </span>
-        <span class="hero-meta-item">
-          <i class="fa-solid fa-user-tie"></i> Sponsor: Dr. Michael Robinson
-        </span>
+          <div class="hero-ribbon">
+            <span class="hero-ribbon-label">Investigator benefit</span>
+            <strong>One timeline, one hash trail, three exfiltration surfaces.</strong>
+          </div>
+        </div>
       </div>
-
-      <div data-aos="fade-up" data-aos-delay="400">
-        <a href="#about" class="btn-teal me-3">
-          Explore the Project <i class="fa-solid fa-arrow-down ms-1"></i>
-        </a>
-        <a href="#architecture" class="btn-outline-teal">
-          View Architecture
-        </a>
-      </div>
-
     </div>
   </section>
 
@@ -515,7 +571,7 @@
             <p class="team-role">Email &amp; Forensics Lead</p>
             <hr class="team-divider" />
             <ul class="team-contributions text-start">
-              <li>Developed email monitoring agent (<code style="color:var(--accent-teal);background:rgba(0,212,255,0.08);padding:0 3px;border-radius:3px;">email_monitor.py</code>) with dual-backend architecture</li>
+              <li>Developed email monitoring agent (<code style="color:var(--accent-teal);background:var(--accent-soft);padding:0 3px;border-radius:3px;">email_monitor.py</code>) with dual-backend architecture</li>
               <li>Implemented Outlook COM backend via pywin32 for desktop Outlook</li>
               <li>Implemented Microsoft Graph API backend (OAuth2) for Outlook Web/365</li>
               <li>Designed SHA-256 hashing for all email attachments &mdash; the forensic bridge</li>
@@ -805,7 +861,7 @@
 
       <p class="footer-bottom">
         &copy; <span id="currentYear">2026</span> S26-Team22 &mdash; University of Louisville
-        &bull; Built with HTML, CSS &amp; JavaScript &bull; Hosted on AWS S3 + CloudFront
+        &bull; Built with HTML, CSS &amp; JavaScript &bull; Hosted on GitHub Pages
       </p>
 
     </div>

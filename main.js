@@ -1,12 +1,6 @@
-/* ============================================================
-   Capstone Project — S26-Team22
-   main.js — AOS, smooth scroll, active nav, mobile collapse
-   ============================================================ */
-
-// ── AOS (Animate On Scroll) Init ───────────────────────────────
 AOS.init({
   duration: 700,
-  easing: 'ease-out-cubic',
+  easing: "ease-out-cubic",
   once: true,
   offset: 80,
   disable: function () {
@@ -14,56 +8,73 @@ AOS.init({
   }
 });
 
-// ── Active Nav Link Highlighting ───────────────────────────────
 (function () {
-  var nav = document.getElementById('mainNav');
+  var nav = document.getElementById("mainNav");
   var navLinks = document.querySelectorAll('#mainNav .nav-link[href^="#"]');
-  var sections = document.querySelectorAll('section[id]');
+  var sections = document.querySelectorAll("section[id]");
 
-  function updateActiveLink() {
+  function syncNavState() {
+    if (!nav) {
+      return;
+    }
+
     var scrollY = window.scrollY;
-    var current = '';
+    var current = "";
+
+    nav.classList.toggle("scrolled", scrollY > 18);
 
     sections.forEach(function (section) {
-      var top = section.offsetTop - 100;
+      var top = section.offsetTop - 120;
       if (scrollY >= top) {
-        current = section.getAttribute('id');
+        current = section.getAttribute("id");
       }
     });
 
     navLinks.forEach(function (link) {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === '#' + current) {
-        link.classList.add('active');
+      link.classList.remove("active");
+      if (link.getAttribute("href") === "#" + current) {
+        link.classList.add("active");
       }
     });
   }
 
-  window.addEventListener('scroll', updateActiveLink, { passive: true });
-  updateActiveLink();
+  window.addEventListener("scroll", syncNavState, { passive: true });
+  window.addEventListener("load", syncNavState);
+  syncNavState();
 })();
 
-// ── Smooth Scroll with Nav Offset ──────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-  anchor.addEventListener('click', function (e) {
-    var targetId = this.getAttribute('href');
-    if (targetId === '#') return;
+  anchor.addEventListener("click", function (event) {
+    var targetId = this.getAttribute("href");
+    if (targetId === "#") {
+      return;
+    }
+
     var target = document.querySelector(targetId);
-    if (!target) return;
-    e.preventDefault();
-    var navHeight = document.getElementById('mainNav').offsetHeight;
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+
+    var navHeight = document.getElementById("mainNav").offsetHeight;
     var targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight - 8;
-    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "smooth"
+    });
   });
 });
 
-// ── Mobile Collapse: Close on Link Click ───────────────────────
 (function () {
-  var navCollapse = document.getElementById('navbarNav');
-  if (!navCollapse) return;
+  var navCollapse = document.getElementById("navbarNav");
+  if (!navCollapse) {
+    return;
+  }
 
-  document.querySelectorAll('#navbarNav .nav-link').forEach(function (link) {
-    link.addEventListener('click', function () {
+  document.querySelectorAll("#navbarNav .nav-link").forEach(function (link) {
+    link.addEventListener("click", function () {
       var bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
       if (bsCollapse) {
         bsCollapse.hide();
@@ -72,9 +83,8 @@ document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
   });
 })();
 
-// ── Current Year in Footer ─────────────────────────────────────
 (function () {
-  var yearEl = document.getElementById('currentYear');
+  var yearEl = document.getElementById("currentYear");
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
